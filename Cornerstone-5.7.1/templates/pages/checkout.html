@@ -1,0 +1,216 @@
+{{#partial "head"}}
+
+{{{ checkout.checkout_head }}}
+{{{ stylesheet '/assets/css/optimized-checkout.css' }}}
+{{ getFontsCollection }}
+
+<script type="text/javascript">
+    window.language = {{{langJson 'optimized_checkout'}}};
+</script>
+
+{{{head.scripts}}}
+
+{{/partial}}
+
+{{#partial "page"}}
+<header class="checkoutHeader optimizedCheckout-header {{#if customer.customer_group_name}} {{lowercase customer.customer_group_name}} {{/if}}" data-name="{{#if customer.customer_group_name}}{{lowercase customer.customer_group_name}}{{/if}}">
+    <div class="checkoutHeader-content">
+        <h1 class="is-srOnly">{{lang 'checkout.title'}}</h1>
+        <h2 class="checkoutHeader-heading">
+            <a class="checkoutHeader-link" href="{{urls.home}}">
+                {{#if checkout.header_image}}
+                    <img alt="{{settings.store_logo.title}}" class="checkoutHeader-logo" id="logoImage" src="{{ checkout.header_image }}"/>
+                {{ else }}
+                    <span class="header-logo-text">{{settings.store_logo.title}}</span>
+                {{/if}}
+            </a>
+        </h2>
+    </div>
+</header>
+
+
+<div id="checkout-app"></div>
+
+
+<style>
+    label._3VHS2rHzGem9uGiK-Mg43j {
+        margin: 0 0 8px;
+    }
+    .ZzeN3nDchmI-OL8qF9w61 {
+        vertical-align: middle; margin-bottom: 0;
+    }
+    .dd_customer label._3VHS2rHzGem9uGiK-Mg43j.dd_customer {
+        display: none !important; opacity: 0 !important; height: 0 !important; width: 0 !important;
+    }
+    /**/
+	.ctm_block_checkout 
+	{	margin: 0;
+    padding: 0;
+    background: #f5f5f5;
+    margin-top: -201px;
+	}
+	.checkbox_innner
+	{	margin: 0 auto; max-width: 1110px; padding:0;
+	}
+	.customOrderButton, .customOrderButton:hover, .customOrderButton:active, .customOrderButton:focus
+	{	max-width:712px; background:#444444; height:48px; padding:0; margin:0; text-align:center; display:block; line-height:48px; border:0; font-family: 'Raleway', sans-serif; border-radius: 4px; font-size: 16px; font-weight: 700; letter-spacing: 0.8px; text-transform:capitalize; 
+	}
+	.termsconditions_label
+	{	margin:10px 0 0; 
+	}
+	@media only screen and (max-width: 1199px){
+		.checkbox_innner
+		{	max-width:700px; margin:0; padding:0 34px;	
+		}
+		.customOrderButton.button
+		{	max-width:574px; margin:0; 
+		}
+	}
+	@media only screen and (max-width: 990px){
+		.checkbox_innner
+		{	max-width:100%; 
+		}
+		.customOrderButton.button
+		{	max-width:100%;
+		}
+		.ctm_order_btn 
+		{	padding: 0 24px;
+		}
+		.checkbox_innner textarea.form-input.optimizedCheckout-form-input
+		{	max-width:100%; width:100%;
+		}
+	}
+	@media only screen and (max-width: 479px){
+		.ctm_block_checkout .termsconditions_label 
+		{	font-size: 9px; line-height: 18px; letter-spacing:0.5px; 
+		}
+	}
+</style>
+
+{{{ footer.scripts }}}
+<script src="{{cdn 'assets/dist/theme-bundle.main.js'}}"></script>
+ 
+<script type="text/javascript" defer>
+    // Exported in app.js
+    window.initReact();
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js" type="text/javascript" ></script>
+
+<script>
+    $(document).ready(function(){
+		setTimeout(function(){
+			if ($('.checkoutHeader').hasClass('international')){
+				$("body").addClass("Wholesale_customer");
+			}
+			var get_cl_nm = $('.checkoutHeader').attr('data-name').replace(/ /g,"");
+			$('body').addClass(get_cl_nm+'_customer');
+			$('body').find('[value="cod"]').parent().hide(); 
+			$('body').find('[value="cod"]').parent().addClass(get_cl_nm+'_customer');    
+			
+			setTimeout(function(){
+				if ($('body').hasClass('internationalwholesaler_customer')){
+					$('body').find('#shippingPostalCode').parent('div').hide();
+					setTimeout(function(){
+						$('body').find('#shippingPostalCode').attr('value', '00000');
+					},5000);
+				}  
+			},3000);
+		},2500);  
+	}); 
+</script>
+    
+    <script>
+    function getName() {
+    document.querySelectorAll("[data-test=cart-item-product-title]").forEach(x => { 
+
+    var pName = x.innerHTML 
+    if (pName.includes("#")) {
+    var newName = pName.split("#")[0]
+    x.innerHTML = newName
+    }
+    })
+    }
+
+    setInterval(getName, 200);
+</script>
+<style>
+.checkout-form[data-test="payment-form"] .form-label[for="radio-cod"] {
+    display: none;
+}
+.internationalwholesaler_customer .internationalwholesaler_customer, .internationalwholesaler_customer .checkout-form[data-test="payment-form"] .form-label[for="radio-cod"],
+.dt_customer .dt_customer, .dt_customer .checkout-form[data-test="payment-form"] .form-label[for="radio-cod"],
+.id_customer .id_customer, .id_customer .checkout-form[data-test="payment-form"] .form-label[for="radio-cod"],
+.it_customer .it_customer, .it_customer .checkout-form[data-test="payment-form"] .form-label[for="radio-cod"]{
+    display: flex !important; 
+}
+.ctm_checkbox {
+    margin-bottom: 10px;
+}
+.checkbox_innner textarea.form-input.optimizedCheckout-form-input
+{   max-width: 712px; resize:none;
+}
+@media only screen and (max-width: 1199px) {
+    ._23BUk0ai9a5dH8PEf_G-RF{
+        padding:32px 15px;
+    }
+    .CNY53i3OSxFRIodLj6GKI{
+        white-space: nowrap;
+    }
+}
+@media only screen and (max-width: 990px) {
+    ._3ty4lFPFqi_UH3ApymyBSN{
+        padding-left:0px;
+    }
+}
+@media only screen and (max-width: 767px) {
+.checkoutHeader-link #logoImage {
+    max-width: 300px;
+    display: block;
+    margin: 0 auto;
+}
+}
+@media only screen and (max-width: 479px) {
+.checkoutHeader-link #logoImage {
+    max-width: 200px;
+}
+._2PNmBYJWnPgDm4yfoR5_Ab{
+    font-size:15px;
+}
+.CNY53i3OSxFRIodLj6GKI {
+    white-space: normal;
+    margin-left: 7px;
+}
+.YPyisfRy-IJEFdm7lyE-t{
+    padding:24px 0px;
+}
+}
+
+</style>
+{{/partial}}
+
+{{> layout/empty}}
+
+<script type='text/javascript'>
+window.__lo_site_id = 181674;
+(function() {
+	var wa = document.createElement('script'); wa.type = 'text/javascript'; wa.async = true;
+	wa.src = 'https://d10lpsik1i8c69.cloudfront.net/w.js';
+	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(wa, s);
+  })();
+</script>
+
+<script type='text/javascript'>window.__lo_site_id = 181674;(function() {var wa = document.createElement('script'); wa.type = 'text/javascript'; wa.async = true;wa.src = 'https://d10lpsik1i8c69.cloudfront.net/w.js';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(wa, s);})();</script>
+
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+ <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ <script>
+ $( function() {
+     setTimeout(function(){
+         
+   $( "#field_65" ).datepicker();
+     },3000)
+ } );
+ </script>
